@@ -62,7 +62,25 @@ function makePurchase (product, quantity) {
 		"UPDATE products SET stock_quantity = stock_quantity - ? WHERE item_id = ?",
 		[quantity, product.item_id],
 		function(err, res) {
-			console.log("\nSuccessfully purchased" + quantity + "")
+			console.log("\nSuccessfully purchased" + quantity + "" + product.product_name + "'s!");
+			loadProducts();
 		}
-		)
+	);
+}
+
+function checkInvetory(choiceID, inventory) {
+	for(let i = 0; i <inventory.length; i++) {
+		if(inventory[i].item_id == choiceId) {
+
+			return inventory[i];
+		}
+	}
+	return null;
+}
+
+function checkIfShouldExit(choice) {
+	if (choice.toLowerCase() === "q") {
+		console.log("Goodbye!");
+		process.exit(0);
+	}
 }
